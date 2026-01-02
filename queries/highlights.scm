@@ -1,25 +1,18 @@
-[
-"{"
-"}"
-"|"
-"{elseif"
-"{else}"
-"{if"
-"{/if}"
-"{foreach"
-"{foreachelse}"
-"{/foreach}"
-"{block"
-"{/block}"
-"{nocache}"
-"{/nocache}"
-"{include"
-] @tag
+; Capturar estructuras de control
+(if) @keyword
+(else_if) @keyword
+(else) @keyword
+(foreach) @keyword
+(foreach_else) @keyword
+(block) @keyword
+(nocache) @keyword
+(include) @keyword
 
-(if condition: (text) @string)
-
-(inline (php) @string)
-
+; Capturar contenido
+(text) @string
+(php) @string
 (parameter) @parameter
+(modifier) @function
 
+; Comentarios
 (comment) @comment

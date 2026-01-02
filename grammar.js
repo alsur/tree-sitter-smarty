@@ -29,79 +29,52 @@ module.exports = grammar({
       $.nocache,
     ),
 
-    comment: $ => seq('{*', /[^*]*/, '*}'),
+    comment: $ => seq(/\{+/, '*', /[^*]/, '*', /\}+/),
 
     inline: $ => seq(
-      '{',
+      /\{+/,  // Soporta { y {{
       alias($.text, $.php),
       repeat(seq(
         '|',
         $.modifier,
       )),
-      '}'
+      /\}+/   // Soporta } y }}
     ),
 
     include: $ => seq(
-      '{include',
-      repeat($.parameter),
-      '}',
+      /\{+\s*include/, repeat($.parameter), /\}+/,
     ),
 
     block: $ => seq(
-      '{block',
-      repeat($.parameter),
-      '}',
+      /\{+\s*block/, repeat($.parameter), /\}+/,
       alias(repeat($._nested), $.body),
-      '{/block}',
+      /\{+\/block\}+/
     ),
 
     foreach: $ => seq(
-      '{foreach',
-      /\$[^\s]+/,
-      'as',
-      /\$[^\s=}]+/,
-      optional(seq(
-        '=>',
-        /\$[^}]+/,
-      )),
-      '}',
+      /\{+\s*foreach/, /\$[^\s]+/, 'as', /\$[^\s=}]+/,
+      optional(seq('=>', /\$[^\}]+/)), /\}+/,
       field('body', alias(repeat($._nested), $.body)),
       field('alternative', optional($.foreach_else)),
-      '{/foreach}',
+      /\{+\/foreach\}+/
     ),
 
-    foreach_else: $ => seq(
-      '{foreachelse}',
-      alias(repeat($._nested), $.body),
-    ),
+    foreach_else: $ => seq(/\{+\s*foreachelse\}+/, alias(repeat($._nested), $.body)),
 
     if: $ => seq(
-      '{if',
-      field('condition', alias(/[^}]+/, $.text)),
-      '}',
+      /\{+\s*if/, field('condition', alias(/[^\}]+/, $.text)), /\}+/,
       field('body', alias(repeat($._nested), $.body)),
       repeat(field('alternative', $.else_if)),
       optional(field('alternative', $.else)),
-      '{/if}',
+      /\{+\/if\}+/
     ),
 
-    else_if: $ => seq(
-      '{elseif',
-      field('condition', alias(/[^}]+/, $.text)),
-      '}',
-      field('body', alias(repeat($._nested), $.body)),
-    ),
+    else_if: $ => seq(/\{+\s*elseif/, field('condition', alias(/[^\}]+/, $.text)), /\}+/, field('body', alias(repeat($._nested), $.body))),
 
-    else: $ => seq(
-      '{else}',
-      field('body', alias(repeat($._nested), $.body)),
-    ),
+    else: $ => seq(/\{+\s*else\}+/, field('body', alias(repeat($._nested), $.body))),
 
-    nocache: $ => seq(
-      '{nocache}',
-      field('body', alias(repeat($._nested), $.body)),
-      '{/nocache}',
-    ),
+    nocache: $ => seq(/\{+\s*nocache\}+/, field('body', alias(repeat($._nested), $.body)),
+      /\{+\/nocache\}+/),
 
     // literal: $ => seq(
     //   '{literal}',

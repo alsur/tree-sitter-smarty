@@ -11,11 +11,6 @@
  (foreach_else)
 ] @indent.branch
 
-[
- "{/if}"
- "{/foreach}"
- "{/block}"
- "{/nocache}"
-] @indent.end
-
+; Los nodos de cierre ahora están incluidos en los nodos padres
+; No necesitamos hacer match explícito de los delimitadores de cierre
 (ERROR) @indent.auto

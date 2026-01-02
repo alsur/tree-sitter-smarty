@@ -56,6 +56,7 @@
   {
     "type": "comment",
     "named": true,
+    "extra": true,
     "fields": {}
   },
   {
@@ -254,6 +255,7 @@
   {
     "type": "template",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -296,7 +298,7 @@
     "fields": {}
   },
   {
-    "type": "*}",
+    "type": "*",
     "named": false
   },
   {
@@ -316,67 +318,7 @@
     "named": true
   },
   {
-    "type": "{",
-    "named": false
-  },
-  {
-    "type": "{*",
-    "named": false
-  },
-  {
-    "type": "{/block}",
-    "named": false
-  },
-  {
-    "type": "{/foreach}",
-    "named": false
-  },
-  {
-    "type": "{/if}",
-    "named": false
-  },
-  {
-    "type": "{/nocache}",
-    "named": false
-  },
-  {
-    "type": "{block",
-    "named": false
-  },
-  {
-    "type": "{elseif",
-    "named": false
-  },
-  {
-    "type": "{else}",
-    "named": false
-  },
-  {
-    "type": "{foreach",
-    "named": false
-  },
-  {
-    "type": "{foreachelse}",
-    "named": false
-  },
-  {
-    "type": "{if",
-    "named": false
-  },
-  {
-    "type": "{include",
-    "named": false
-  },
-  {
-    "type": "{nocache}",
-    "named": false
-  },
-  {
     "type": "|",
-    "named": false
-  },
-  {
-    "type": "}",
     "named": false
   }
 ]
