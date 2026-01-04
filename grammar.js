@@ -19,7 +19,10 @@ module.exports = grammar({
       $.while,
       $.if,
       $.nocache,
-      // $.literal,
+      $.literal,
+      $.function,
+      $.call,
+      $.capture,
     ),
 
     _nested: $ => choice(
@@ -31,6 +34,8 @@ module.exports = grammar({
       $.while,
       $.if,
       $.nocache,
+      $.function,
+      $.capture,
     ),
 
     comment: $ => seq(/\{+/, '*', /[^*]/, '*', /\}+/),
@@ -56,7 +61,7 @@ module.exports = grammar({
     ),
 
     foreach: $ => seq(
-      /\{+\s*foreach/, /\$[^\s]+/, 'as', /\$[^\s=}]+/,
+      /\{+\s*foreach/, /\$[^\s]+/, 'as', /\$[^\s]+/,
       optional(seq('=>', /\$[^\}]+/)), /\}+/,
       field('body', alias(repeat($._nested), $.body)),
       field('alternative', optional($.foreach_else)),
@@ -93,11 +98,33 @@ module.exports = grammar({
     nocache: $ => seq(/\{+\s*nocache\}+/, field('body', alias(repeat($._nested), $.body)),
       /\{+\/nocache\}+/),
 
-    // literal: $ => seq(
-    //   '{literal}',
-    //   field('body', alias(repeat($._smarty), $.text)),
-    //   '{/literal}',
-    // ),
+    literal: $ => seq(
+      /\{+\s*literal\}+/,
+      field('body', alias(repeat($._smarty), $.text)),
+      /\{+\/literal\}+/
+    ),
+
+    function: $ => seq(
+      /\{+\s*function\s+/,
+      repeat($.parameter),
+      /\}+/,
+      field('body', alias(repeat($._nested), $.body)),
+      /\{+\/function\}+/
+    ),
+
+    call: $ => seq(
+      /\{+\s*call\s+/,
+      repeat($.parameter),
+      /\}+/
+    ),
+
+    capture: $ => seq(
+      /\{+\s*capture\s+/,
+      repeat($.parameter),
+      /\}+/,
+      field('body', alias(repeat($._nested), $.body)),
+      /\{+\/capture\}+/
+    ),
 
     modifier: $ => seq(
       /[^|:}]+/,

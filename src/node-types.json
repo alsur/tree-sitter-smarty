@@ -27,11 +27,19 @@
       "required": true,
       "types": [
         {
+          "type": "capture",
+          "named": true
+        },
+        {
           "type": "for",
           "named": true
         },
         {
           "type": "foreach",
+          "named": true
+        },
+        {
+          "type": "function",
           "named": true
         },
         {
@@ -56,6 +64,47 @@
         },
         {
           "type": "while",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "call",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "capture",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "body",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "parameter",
           "named": true
         }
       ]
@@ -167,6 +216,32 @@
     }
   },
   {
+    "type": "function",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "body",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "if",
     "named": true,
     "fields": {
@@ -241,6 +316,22 @@
     }
   },
   {
+    "type": "literal",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "text",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "modifier",
     "named": true,
     "fields": {},
@@ -290,11 +381,23 @@
           "named": true
         },
         {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "capture",
+          "named": true
+        },
+        {
           "type": "for",
           "named": true
         },
         {
           "type": "foreach",
+          "named": true
+        },
+        {
+          "type": "function",
           "named": true
         },
         {
@@ -307,6 +410,10 @@
         },
         {
           "type": "inline",
+          "named": true
+        },
+        {
+          "type": "literal",
           "named": true
         },
         {
@@ -327,7 +434,65 @@
   {
     "type": "text",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "capture",
+          "named": true
+        },
+        {
+          "type": "for",
+          "named": true
+        },
+        {
+          "type": "foreach",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "if",
+          "named": true
+        },
+        {
+          "type": "include",
+          "named": true
+        },
+        {
+          "type": "inline",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "nocache",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        },
+        {
+          "type": "while",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "while",
