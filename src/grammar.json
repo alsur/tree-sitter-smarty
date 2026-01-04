@@ -72,33 +72,29 @@
       ]
     },
     "comment": {
-      "type": "PREC",
-      "value": 1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "\\{+"
-          },
-          {
-            "type": "STRING",
-            "value": "*"
-          },
-          {
-            "type": "PATTERN",
-            "value": "[^*]+?"
-          },
-          {
-            "type": "STRING",
-            "value": "*"
-          },
-          {
-            "type": "PATTERN",
-            "value": "\\}+"
-          }
-        ]
-      }
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\{+"
+        },
+        {
+          "type": "STRING",
+          "value": "*"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[^*]"
+        },
+        {
+          "type": "STRING",
+          "value": "*"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\}+"
+        }
+      ]
     },
     "inline": {
       "type": "SEQ",
