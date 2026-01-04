@@ -27,6 +27,10 @@
       "required": true,
       "types": [
         {
+          "type": "for",
+          "named": true
+        },
+        {
           "type": "foreach",
           "named": true
         },
@@ -48,6 +52,10 @@
         },
         {
           "type": "text",
+          "named": true
+        },
+        {
+          "type": "while",
           "named": true
         }
       ]
@@ -95,6 +103,22 @@
         "types": [
           {
             "type": "text",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "for",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "body",
             "named": true
           }
         ]
@@ -266,6 +290,10 @@
           "named": true
         },
         {
+          "type": "for",
+          "named": true
+        },
+        {
           "type": "foreach",
           "named": true
         },
@@ -288,6 +316,10 @@
         {
           "type": "text",
           "named": true
+        },
+        {
+          "type": "while",
+          "named": true
         }
       ]
     }
@@ -296,6 +328,32 @@
     "type": "text",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "while",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "body",
+            "named": true
+          }
+        ]
+      },
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "text",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "*",
@@ -316,6 +374,14 @@
   {
     "type": "parameter",
     "named": true
+  },
+  {
+    "type": "step",
+    "named": false
+  },
+  {
+    "type": "to",
+    "named": false
   },
   {
     "type": "|",

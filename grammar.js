@@ -15,6 +15,8 @@ module.exports = grammar({
       $.block,
       $.text,
       $.foreach,
+      $.for,
+      $.while,
       $.if,
       $.nocache,
       // $.literal,
@@ -25,6 +27,8 @@ module.exports = grammar({
       $.include,
       $.text,
       $.foreach,
+      $.for,
+      $.while,
       $.if,
       $.nocache,
     ),
@@ -60,6 +64,19 @@ module.exports = grammar({
     ),
 
     foreach_else: $ => seq(/\{+\s*foreachelse\}+/, alias(repeat($._nested), $.body)),
+
+    for: $ => seq(
+      /\{+\s*for/, /\$[^\s=]+\s*=\s*\d+/, 'to', /\d+/,
+      optional(seq('step', /\d+/)), /\}+/,
+      field('body', alias(repeat($._nested), $.body)),
+      /\{+\/for\}+/
+    ),
+
+    while: $ => seq(
+      /\{+\s*while/, field('condition', alias(/[^\}]+/, $.text)), /\}+/,
+      field('body', alias(repeat($._nested), $.body)),
+      /\{+\/while\}+/
+    ),
 
     if: $ => seq(
       /\{+\s*if/, field('condition', alias(/[^\}]+/, $.text)), /\}+/,
