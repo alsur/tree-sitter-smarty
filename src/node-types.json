@@ -529,14 +529,6 @@
     "named": false
   },
   {
-    "type": "=>",
-    "named": false
-  },
-  {
-    "type": "as",
-    "named": false
-  },
-  {
     "type": "parameter",
     "named": true
   },

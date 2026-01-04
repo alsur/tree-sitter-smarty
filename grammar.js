@@ -61,8 +61,12 @@ module.exports = grammar({
     ),
 
     foreach: $ => seq(
-      /\{+\s*foreach/, /\$[^\s]+/, 'as', /\$[^\s]+/,
-      optional(seq('=>', /\$[^\}]+/)), /\}+/,
+      /\{+\s*foreach\s+/,
+      /\$\w+/,
+      /\s+as\s+/,
+      /\$\w+/,
+      optional(seq(/\s+=>\s+/, /\$\w+/)),
+      /\s*\}+/,
       field('body', alias(repeat($._nested), $.body)),
       field('alternative', optional($.foreach_else)),
       /\{+\/foreach\}+/

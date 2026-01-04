@@ -235,19 +235,19 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "\\{+\\s*foreach"
+          "value": "\\{+\\s*foreach\\s+"
         },
         {
           "type": "PATTERN",
-          "value": "\\$[^\\s]+"
-        },
-        {
-          "type": "STRING",
-          "value": "as"
+          "value": "\\$\\w+"
         },
         {
           "type": "PATTERN",
-          "value": "\\$[^\\s]+"
+          "value": "\\s+as\\s+"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\$\\w+"
         },
         {
           "type": "CHOICE",
@@ -256,12 +256,12 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "STRING",
-                  "value": "=>"
+                  "type": "PATTERN",
+                  "value": "\\s+=>\\s+"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "\\$[^\\}]+"
+                  "value": "\\$\\w+"
                 }
               ]
             },
@@ -272,7 +272,7 @@
         },
         {
           "type": "PATTERN",
-          "value": "\\}+"
+          "value": "\\s*\\}+"
         },
         {
           "type": "FIELD",
