@@ -2,7 +2,6 @@ module.exports = grammar({
   name: 'smarty',
 
   extras: $ => [
-    $.comment,
     /\s+/,
   ],
 
@@ -10,6 +9,7 @@ module.exports = grammar({
     template: $ => repeat($._smarty),
 
     _smarty: $ => choice(
+      $.comment,
       $.inline,
       $.include,
       $.block,
@@ -38,7 +38,7 @@ module.exports = grammar({
       $.capture,
     ),
 
-    comment: $ => seq(/\{+/, '*', /[^*]/, '*', /\}+/),
+    comment: $ => seq(/\{+/, '*', /[^*]*/, '*', /\}+/),
 
     inline: $ => seq(
       /\{+/,  // Soporta { y {{

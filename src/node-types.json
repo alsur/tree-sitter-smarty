@@ -113,7 +113,6 @@
   {
     "type": "comment",
     "named": true,
-    "extra": true,
     "fields": {}
   },
   {
@@ -399,6 +398,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "for",
           "named": true
         },
@@ -459,6 +462,10 @@
         },
         {
           "type": "capture",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
