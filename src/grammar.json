@@ -238,18 +238,6 @@
           "value": "\\{+\\s*foreach\\s+"
         },
         {
-          "type": "PATTERN",
-          "value": "\\$\\w+"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\s+as\\s+"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\$\\w+"
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
@@ -257,16 +245,63 @@
               "members": [
                 {
                   "type": "PATTERN",
-                  "value": "\\s+=>\\s+"
+                  "value": "\\$\\w+"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "\\s+as\\s+"
                 },
                 {
                   "type": "PATTERN",
                   "value": "\\$\\w+"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "PATTERN",
+                          "value": "\\s+=>\\s+"
+                        },
+                        {
+                          "type": "PATTERN",
+                          "value": "\\$\\w+"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
                 }
               ]
             },
             {
-              "type": "BLANK"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "parameter"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "PATTERN",
+                        "value": "\\s+"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "parameter"
+                      }
+                    ]
+                  }
+                }
+              ]
             }
           ]
         },
@@ -775,7 +810,7 @@
     },
     "parameter": {
       "type": "PATTERN",
-      "value": "[^\\s=]+[\\s]*=[\\s]*('[^']*'|\"[^\"]*\"|\\[[^]]*])"
+      "value": "[^\\s=]+[\\s]*=[\\s]*('[^']*'|\"[^\"]*\"|\\[[^]]*]|[\\$][^\\s]*|[^\\s}]+)"
     },
     "text": {
       "type": "PREC",

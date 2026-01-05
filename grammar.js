@@ -62,10 +62,20 @@ module.exports = grammar({
 
     foreach: $ => seq(
       /\{+\s*foreach\s+/,
-      /\$\w+/,
-      /\s+as\s+/,
-      /\$\w+/,
-      optional(seq(/\s+=>\s+/, /\$\w+/)),
+      choice(
+        // Smarty 3 syntax: {foreach $array as $item}
+        seq(
+          /\$\w+/,
+          /\s+as\s+/,
+          /\$\w+/,
+          optional(seq(/\s+=>\s+/, /\$\w+/))
+        ),
+        // Smarty 2 syntax: {foreach from=$array item=$item}
+        seq(
+          $.parameter,
+          repeat(seq(/\s+/, $.parameter))
+        )
+      ),
       /\s*\}+/,
       field('body', alias(repeat($._nested), $.body)),
       field('alternative', optional($.foreach_else)),
@@ -138,7 +148,7 @@ module.exports = grammar({
       )),
     ),
 
-    parameter: $ => /[^\s=]+[\s]*=[\s]*('[^']*'|"[^"]*"|\[[^]]*])/,
+    parameter: $ => /[^\s=]+[\s]*=[\s]*('[^']*'|"[^"]*"|\[[^]]*]|[\$][^\s]*|[^\s}]+)/,
 
     text: $ => prec(-1, /[^\s\|{*}-]([^\|{*}]*[^\|{*}-])?/),
   },
