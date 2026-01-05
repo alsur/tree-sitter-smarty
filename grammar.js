@@ -40,7 +40,7 @@ module.exports = grammar({
 
     comment: $ => seq(/\{+/, '*', /[^*]*/, '*', /\}+/),
 
-    inline: $ => seq(
+    inline: $ => prec(-1, seq(
       /\{+/,  // Soporta { y {{
       alias($.text, $.php),
       repeat(seq(
@@ -48,7 +48,7 @@ module.exports = grammar({
         $.modifier,
       )),
       /\}+/   // Soporta } y }}
-    ),
+    )),
 
     include: $ => seq(
       /\{+\s*include/, repeat($.parameter), /\}+/,

@@ -141,42 +141,46 @@
       ]
     },
     "inline": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "\\{+"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "text"
+      "type": "PREC",
+      "value": -1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "\\{+"
           },
-          "named": true,
-          "value": "php"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "|"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "modifier"
-              }
-            ]
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "text"
+            },
+            "named": true,
+            "value": "php"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "|"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "modifier"
+                }
+              ]
+            }
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\}+"
           }
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\}+"
-        }
-      ]
+        ]
+      }
     },
     "include": {
       "type": "SEQ",
